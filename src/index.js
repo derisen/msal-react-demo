@@ -8,12 +8,30 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from './App';
 
+import { PublicClientApplication, EventType } from '@azure/msal-browser';
+
+const pca = new PublicClientApplication({
+    auth: {
+        clientId: 'b96e5b82-8abb-4cbb-b4bf-7b7554404eac',
+        authority: 'https://login.microsoftonline.com/cbaf2168-de14-4c72-9d88-f5f05366dbef',
+        redirectUri: '/',
+        postLogoutRedirectUri: '/',
+    }
+});
+
+pca.addEventCallback((event) => {
+    if (event.eventType === EventType.LOGIN_SUCCESS && event.payload.account) {
+        pca.setActiveAccount(event.payload.account);
+    }
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
     <React.StrictMode>
         <BrowserRouter>
             <ThemeProvider theme={theme}>
-                <App />
+                <App msalInstance={pca}/>
             </ThemeProvider>
         </BrowserRouter>
     </React.StrictMode>
