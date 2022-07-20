@@ -1,19 +1,18 @@
 import Grid from "@mui/material/Grid";
-
 import { PageLayout } from "./components/PageLayout";
-import { ProfileData } from "./components/ProfileData";
+import { Routes, Route } from "react-router-dom";
+
+import { Home } from "./pages/Home";
+import { Profile } from "./pages/Profile";
 
 function App() {
     return (
         <PageLayout>
             <Grid container justifyContent="center">
-                <ProfileData graphData={{
-                    displayName: 'Dummy Joe',
-                    jobTitle: 'Dummy Title',
-                    mail: 'dummy@mail.com',
-                    businessPhones: ['1234567890'],
-                    officeLocation: 'dummy address',
-                }}/>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/profile" element={<Profile />} />
+                </Routes>
             </Grid>
         </PageLayout>
     );

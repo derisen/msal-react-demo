@@ -2,9 +2,11 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import { WelcomeName } from "./WelcomeName";
 import { SignInButton } from "./SignInButton";
 import { SignOutButton } from "./SignOutButton";
+import { Link as RouterLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
@@ -12,13 +14,12 @@ const NavBar = () => {
             <AppBar position="static">
                 <Toolbar>
                     <Typography sx={{ flexGrow: 1 }}>
-                        <Link to="/" color="inherit" variant="h6">Microsoft identity platform</Link>
+                        <Link component={RouterLink} to="/" color="inherit" variant="h6">Microsoft identity platform</Link>
                     </Typography>
                     <WelcomeName />
-                    <div className="auth-btn">
-                        <SignInButton />
-                        <SignOutButton />
-                    </div>
+                    <Button component={RouterLink} to="/profile" color="inherit">Profile</Button>
+                    <SignInButton />
+                    <SignOutButton />
                 </Toolbar>
             </AppBar>
         </div>
