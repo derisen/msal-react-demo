@@ -7,7 +7,6 @@ import { MsalProvider, useIsAuthenticated, useMsal } from "@azure/msal-react";
 import { InteractionRequiredAuthError } from "@azure/msal-browser";
 import Grid from "@mui/material/Grid";
 
-
 function App({ msalInstance }) {
     return (
         <MsalProvider instance={msalInstance}>
@@ -45,4 +44,5 @@ const Pages = () => {
         </Routes>
     )
 }
+
 export default App;
