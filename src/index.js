@@ -16,11 +16,23 @@ const pca = new PublicClientApplication({
         authority: 'https://login.microsoftonline.com/cbaf2168-de14-4c72-9d88-f5f05366dbef',
         redirectUri: '/',
         postLogoutRedirectUri: '/',
+    },
+    cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: false,
+    },
+    system: {
+        loggerOptions: {
+            loggerCallback: (level, message, containsPII) => {
+                console.log(message)
+            },
+            logLevel: "Verbose"
+        }
     }
 });
 
 pca.addEventCallback((event) => {
-    if (event.eventType === EventType.LOGIN_SUCCESS && event.payload.account) {
+    if (event.eventType === EventType.LOGIN_SUCCESS) {
         pca.setActiveAccount(event.payload.account);
     }
 });
