@@ -26,8 +26,10 @@ const Pages = () => {
     useEffect(() => {
         if (!isAuthenticated) {
             instance.ssoSilent({
-                // scopes: ["user.read"],
-                // loginHint: "",
+                scopes: ["user.read"],
+                // loginHint: "", 
+            }).then((response) => {
+                instance.setActiveAccount(response.account);
             }).catch(error => {
                     if (error instanceof InteractionRequiredAuthError) {
                         instance.loginRedirect();
