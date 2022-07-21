@@ -11,14 +11,19 @@ function App({ msalInstance }) {
         <MsalProvider instance={msalInstance}>
             <PageLayout>
                 <Grid container justifyContent="center">
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/profile" element={<Profile />} />
-                    </Routes>
+                    <Pages />
                 </Grid>
             </PageLayout>
         </MsalProvider>
     );
 }
 
+const Pages = () => {
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+        </Routes>
+    )
+}
 export default App;
