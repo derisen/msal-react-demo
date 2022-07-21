@@ -16,6 +16,7 @@ const pca = new PublicClientApplication({
         authority: 'https://login.microsoftonline.com/cbaf2168-de14-4c72-9d88-f5f05366dbef',
         redirectUri: '/',
         postLogoutRedirectUri: '/',
+        clientCapabilities: ['CP1']
     }
 });
 

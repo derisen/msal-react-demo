@@ -6,7 +6,9 @@ import { fetchData } from "../fetch";
 
 export const Profile = () => {
     const { result, error, login } = useMsalAuthentication(InteractionType.Popup, {
-        scopes: ["user.read"]
+        scopes: ["user.read"],
+        claims: sessionStorage.getItem('claimsChallenge') 
+            ? window.atob(sessionStorage.getItem('claimsChallenge')) : undefined
     });
 
     const [graphData, setGraphData] = useState(null);
