@@ -9,12 +9,18 @@ function App() {
     return (
         <PageLayout>
             <Grid container justifyContent="center">
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/profile" element={<Profile />} />
-                </Routes>
+                <Pages />
             </Grid>
         </PageLayout>
+    );
+}
+
+const Pages = () => {
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+        </Routes>
     );
 }
 
