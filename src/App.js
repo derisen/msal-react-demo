@@ -1,10 +1,12 @@
-import Grid from "@mui/material/Grid";
-import { PageLayout } from "./components/PageLayout";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-
+import { PageLayout } from "./components/PageLayout";
 import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
-import { MsalProvider } from "@azure/msal-react";
+import { MsalProvider, useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { InteractionRequiredAuthError } from "@azure/msal-browser";
+import Grid from "@mui/material/Grid";
+
 
 function App({ msalInstance }) {
     return (
@@ -19,6 +21,23 @@ function App({ msalInstance }) {
 }
 
 const Pages = () => {
+    const { instance } = useMsal();
+    const isAuthenticated = useIsAuthenticated();
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            instance.ssoSilent({
+                // scopes: ["user.read"],
+                // loginHint: "",
+            }).catch(error => {
+                    if (error instanceof InteractionRequiredAuthError) {
+                        instance.loginRedirect();
+                    }
+                });
+        }
+    // eslint-disable-next-line
+    }, []);
+
     return (
         <Routes>
             <Route path="/" element={<Home />} />

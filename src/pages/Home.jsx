@@ -1,24 +1,7 @@
 import Typography from "@mui/material/Typography";
-import { AuthenticatedTemplate, UnauthenticatedTemplate, useIsAuthenticated, useMsal } from "@azure/msal-react";
-import { InteractionRequiredAuthError } from "@azure/msal-browser";
-import { useEffect } from "react";
+import { AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 
 export const Home = () => {
-    const { instance } = useMsal();
-    const isAuthenticated = useIsAuthenticated();
-
-    useEffect(() => {
-        if (!isAuthenticated) {
-            instance.ssoSilent()
-                .catch(error => {
-                    if (error instanceof InteractionRequiredAuthError) {
-                        instance.loginRedirect();
-                    }
-                });
-        }
-    // eslint-disable-next-line
-    }, []);
-
     return (
         <>
             <AuthenticatedTemplate>
